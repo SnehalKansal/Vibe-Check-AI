@@ -1,15 +1,31 @@
 // src/App.jsx
 import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import Header from './components/Header';
 import LoadingSpinner from './components/LoadingSpinner';
 import VibeResults from './components/VibeResults';
+import Homepage from './components/Homepage';
 
 export default function App() {
+    const [currentView, setCurrentView] = useState('homepage'); // 'homepage' or 'app'
     const [instaLink, setInstaLink] = useState('');
     const [spotifyLink, setSpotifyLink] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [results, setResults] = useState(null);
     const [error, setError] = useState('');
+
+    const handleGetStarted = () => {
+        setCurrentView('app');
+    };
+
+    const handleBackToHome = () => {
+        setCurrentView('homepage');
+        // Reset app state when going back to homepage
+        setInstaLink('');
+        setSpotifyLink('');
+        setResults(null);
+        setError('');
+    };
 
     const isValidInstagramUrl = (string) => {
         if (!string) return false;
@@ -111,70 +127,128 @@ export default function App() {
     };
 
     return (
-        <div className="bg-gradient-to-br from-gray-900 to-gray-950 text-white min-h-screen flex flex-col items-center justify-center p-4 font-sans antialiased">
-            <main className="w-full max-w-4xl mx-auto py-8">
-                <div className="bg-gray-800/60 backdrop-blur-lg p-8 md:p-10 rounded-3xl shadow-3xl border border-gray-700/50 text-center relative overflow-hidden">
-                    <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-tr from-cyan-900/10 via-transparent to-purple-900/10 pointer-events-none rounded-3xl"></div>
-                    <Header />
+        <AnimatePresence mode="wait">
+            {currentView === 'homepage' ? (
+                <motion.div
+                    key="homepage"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.5 }}
+                >
+                    <Homepage onGetStarted={handleGetStarted} />
+                </motion.div>
+            ) : (
+                <motion.div
+                    key="app"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.5 }}
+                    className="bg-gradient-to-br from-gray-900 to-gray-950 text-white min-h-screen flex flex-col items-center justify-center p-4 font-sans antialiased"
+                >
+                    {/* Back to Homepage Button */}
+                    <motion.button
+                        onClick={handleBackToHome}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.3 }}
+                        className="fixed top-6 left-6 z-50 bg-gray-800/60 backdrop-blur-lg hover:bg-gray-700/60 text-white font-semibold py-2 px-4 rounded-xl border border-gray-600/50 hover:border-gray-500/50 transition-all duration-300 flex items-center gap-2"
+                    >
+                        ← Back to Home
+                    </motion.button>
 
-                    {/* Input Section */}
-                    <div className="space-y-5 mb-8 relative z-10">
-                        <input
-                            type="text"
-                            value={instaLink}
-                            onChange={(e) => setInstaLink(e.target.value)}
-                            placeholder="Paste Instagram profile link or username..."
-                            className="w-full bg-gray-900 border border-gray-700 text-white placeholder-gray-500 rounded-xl py-3 px-5 focus:ring-2 focus:ring-cyan-500 focus:outline-none transition-all duration-200 text-lg shadow-inner"
-                            disabled={isLoading}
-                        />
-                        
-                        <input
-                            type="text"
-                            value={spotifyLink}
-                            onChange={(e) => setSpotifyLink(e.target.value)}
-                            placeholder="Paste Spotify playlist link (optional)..."
-                            className="w-full bg-gray-900 border border-gray-700 text-white placeholder-gray-500 rounded-xl py-3 px-5 focus:ring-2 focus:ring-purple-500 focus:outline-none transition-all duration-200 text-lg shadow-inner"
-                            disabled={isLoading}
-                        />
-                        
-                        <div className="flex gap-3">
-                            <button
-                                onClick={handleVibeCheck}
-                                disabled={isLoading}
-                                className="flex-1 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-gray-900 font-bold py-3 px-6 rounded-xl shadow-lg transition duration-300 transform hover:scale-102 disabled:from-gray-600 disabled:to-gray-700 disabled:cursor-not-allowed disabled:transform-none text-lg"
+                    <main className="w-full max-w-4xl mx-auto py-8">
+                        <motion.div
+                            initial={{ opacity: 0, y: 30 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6, delay: 0.2 }}
+                            className="bg-gray-800/60 backdrop-blur-lg p-8 md:p-10 rounded-3xl shadow-3xl border border-gray-700/50 text-center relative overflow-hidden"
+                        >
+                            <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-tr from-cyan-900/10 via-transparent to-purple-900/10 pointer-events-none rounded-3xl"></div>
+                            <Header />
+
+                            {/* Input Section */}
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ duration: 0.6, delay: 0.4 }}
+                                className="space-y-5 mb-8 relative z-10"
                             >
-                                {isLoading ? 'Analyzing...' : 'Vibe Check'}
-                            </button>
-                            
-                            {(results || error) && (
-                                <button
-                                    onClick={handleClearAll}
+                                <input
+                                    type="text"
+                                    value={instaLink}
+                                    onChange={(e) => setInstaLink(e.target.value)}
+                                    placeholder="Paste Instagram profile link or username..."
+                                    className="w-full bg-gray-900 border border-gray-700 text-white placeholder-gray-500 rounded-xl py-3 px-5 focus:ring-2 focus:ring-cyan-500 focus:outline-none transition-all duration-200 text-lg shadow-inner"
                                     disabled={isLoading}
-                                    className="bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-xl shadow-lg transition duration-300 transform hover:scale-102 disabled:cursor-not-allowed disabled:transform-none"
-                                >
-                                    Clear
-                                </button>
-                            )}
-                        </div>
-                        
-                        {error && (
-                            <div className="bg-red-900/30 border border-red-700 p-4 rounded-xl">
-                                <p className="text-red-400 text-sm animate-pulse">⚠️ {error}</p>
-                            </div>
-                        )}
-                    </div>
+                                />
+                                
+                                <input
+                                    type="text"
+                                    value={spotifyLink}
+                                    onChange={(e) => setSpotifyLink(e.target.value)}
+                                    placeholder="Paste Spotify playlist link (optional)..."
+                                    className="w-full bg-gray-900 border border-gray-700 text-white placeholder-gray-500 rounded-xl py-3 px-5 focus:ring-2 focus:ring-purple-500 focus:outline-none transition-all duration-200 text-lg shadow-inner"
+                                    disabled={isLoading}
+                                />
+                                
+                                <div className="flex gap-3">
+                                    <motion.button
+                                        onClick={handleVibeCheck}
+                                        disabled={isLoading}
+                                        whileHover={{ scale: 1.02 }}
+                                        whileTap={{ scale: 0.98 }}
+                                        className="flex-1 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-gray-900 font-bold py-3 px-6 rounded-xl shadow-lg transition duration-300 transform disabled:from-gray-600 disabled:to-gray-700 disabled:cursor-not-allowed disabled:transform-none text-lg"
+                                    >
+                                        {isLoading ? 'Analyzing...' : 'Vibe Check'}
+                                    </motion.button>
+                                    
+                                    {(results || error) && (
+                                        <motion.button
+                                            onClick={handleClearAll}
+                                            disabled={isLoading}
+                                            whileHover={{ scale: 1.02 }}
+                                            whileTap={{ scale: 0.98 }}
+                                            className="bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-xl shadow-lg transition duration-300 transform disabled:cursor-not-allowed disabled:transform-none"
+                                        >
+                                            Clear
+                                        </motion.button>
+                                    )}
+                                </div>
+                                
+                                {error && (
+                                    <motion.div
+                                        initial={{ opacity: 0, y: 10 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        className="bg-red-900/30 border border-red-700 p-4 rounded-xl"
+                                    >
+                                        <p className="text-red-400 text-sm animate-pulse">⚠️ {error}</p>
+                                    </motion.div>
+                                )}
+                            </motion.div>
 
-                    {/* Loading & Results */}
-                    <div className="relative z-10">
-                        {isLoading && <LoadingSpinner />}
+                            {/* Loading & Results */}
+                            <div className="relative z-10">
+                                {isLoading && <LoadingSpinner />}
+                                
+                                {results && !isLoading && (
+                                    <motion.div
+                                        initial={{ opacity: 0, y: 20 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        transition={{ duration: 0.6 }}
+                                    >
+                                        <VibeResults results={results} />
+                                    </motion.div>
+                                )}
+                            </div>
+                        </motion.div>
                         
-                        {results && !isLoading && <VibeResults results={results} />}
-                    </div>
-                </div>
-                
-                <footer className="text-center mt-12">
-                </footer>
-            </main>
-        </div>
+                        <footer className="text-center mt-12">
+                        </footer>
+                    </main>
+                </motion.div>
+            )}
+        </AnimatePresence>
     );
 }
