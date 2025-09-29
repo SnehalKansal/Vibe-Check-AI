@@ -13,7 +13,6 @@
 - **Sentiment Analysis**: Determines the overall mood and sentiment of your content
 - **Personalized Vibe Profile**: Creates a detailed personality analysis
 - **Custom Memes**: Generates memes based on your content
-- **Spotify Integration**: (Optional) Analyzes your music taste
 - **Modern UI**: Beautiful, responsive design with dark theme
 
 ## 🛠️ Tech Stack
@@ -95,7 +94,6 @@
 1. **Start both backend and frontend servers** using the steps above
 2. **Open your browser** to `http://localhost:5173`
 3. **Enter an Instagram profile link** or username (e.g., `username` or `https://instagram.com/username`)
-4. **(Optional)** Add a Spotify playlist link for music analysis
 5. **Click "Vibe Check"** and wait for the AI analysis
 6. **View your results**: personalized vibe profile and custom memes!
 
@@ -135,16 +133,12 @@ GEMINI_API_KEY=your_gemini_api_key_here
 INSTA_USER=your_instagram_username
 INSTA_PASS=your_instagram_password
 
-# Spotify API credentials (for music analysis)
-SPOTIPY_CLIENT_ID=your_spotify_client_id
-SPOTIPY_CLIENT_SECRET=your_spotify_client_secret
 ```
 
 ### Getting API Keys
 
 1. **Google Gemini API**: Visit [Google AI Studio](https://aistudio.google.com/app/apikey) to get an API key
-2. **Spotify API**: Visit [Spotify for Developers](https://developer.spotify.com/) to create an app
-3. **Instagram**: Use your regular Instagram credentials (optional)
+3. **Instagram**: Use your regular Instagram credentials
 
 ## 🌐 API Endpoints
 
@@ -161,15 +155,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 *This is a demo application that uses sample data for Instagram content analysis. Please respect Instagram's Terms of Service and API usage guidelines.*
 
-## 🙆 Support
 
-If you encounter issues:
-
-1. Check the troubleshooting section above
-2. Look at the browser console for error messages
-3. Check that both servers are running properly
-4. Review the API documentation at `http://127.0.0.1:8000/docs`
-5. [Open an issue](https://github.com/yourusername/vibe-check-ai/issues) on GitHub
 
 ## 🎆 Future Enhancements
 
