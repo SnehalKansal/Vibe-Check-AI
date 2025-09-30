@@ -90,8 +90,8 @@ Vibe Check AI solves this by:
 #### 1. Repository Setup
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/vibe-check-ai.git
-cd vibe-check-ai
+git clone https://github.com/SnehalKansal/Vibe-Check-AI.git
+cd Vibe-Check-AI
 ```
 
 #### 2. Backend Configuration
@@ -151,7 +151,7 @@ Open your web browser and navigate to: `http://localhost:5173`
 3. Generate an API key
 4. Add the key to your `.env` file as `GEMINI_API_KEY`
 
-#### Instagram API Setup (Optional)
+#### Instagram API Setup 
 The application includes a robust fallback system and works without Instagram API setup. For enhanced functionality:
 
 1. Create a Facebook Developer account
@@ -231,18 +231,6 @@ vibe-check-app/
 ├── README.md                   # Project documentation
 └── VibeCheckAI.pdf            # Supplementary documentation
 ```
-
-### Backend Architecture Details
-- **main.py**: FastAPI application with CORS middleware, API endpoints, and error handling
-- **instagram_api.py**: Instagram Business API integration with fallback mechanisms
-- **Async Design**: All API calls use async/await for optimal performance
-- **Error Handling**: Comprehensive try-catch blocks for robust operation
-
-### Frontend Architecture Details
-- **Component-Based**: Modular React components for maintainability
-- **State Management**: React hooks for efficient state handling
-- **Responsive Design**: Mobile-first approach with Tailwind CSS
-- **Animation System**: Framer Motion for smooth user interactions
 
 
 
@@ -354,64 +342,16 @@ DEBUG=true
 }
 ```
 
-## 🏗️ Development & Contribution
 
-### Development Workflow
-1. **Fork Repository**: Fork the project to your GitHub account
-2. **Create Branch**: Create feature branch from main
-3. **Make Changes**: Implement features or fixes
-4. **Test Thoroughly**: Ensure all functionality works correctly
-5. **Submit PR**: Create pull request with detailed description
-
-### Code Quality Standards
-- **Python**: Follow PEP 8 style guidelines
-- **JavaScript**: Use ESLint configuration provided
-- **Commits**: Use semantic commit messages
-- **Documentation**: Update README for significant changes
-
-### Testing Procedures
-1. **Backend Testing**: Test all API endpoints with various inputs
-2. **Frontend Testing**: Verify responsive design and animations
-3. **Integration Testing**: Test complete user workflow
-4. **Error Handling**: Verify graceful error handling
 
 ## 🎥 Submissions
 
 ### Demo Video
 https://youtu.be/Bs4tvbXKteM
 
-### Documentation Resources
-- **Technical Documentation**: Complete setup and usage guide ## 🏆 Samsung PRISM GenAI Hackathon 2025
 
-**Team**: VibeCheckAI  
+**Team**: 3 Bytes
 **Submission Tag**: `SamsungPRISMGenAIHackathon2025`  
-**Repository**: Public GitHub Repository  
-**License**: MIT License  
 
-### Hackathon Highlights
-- **Innovative AI Application**: Combines multiple AI technologies for social media analysis
-- **Production Ready**: Robust error handling and fallback systems
-- **Modern Tech Stack**: Latest frameworks and best practices
-- **User Experience Focus**: Beautiful animations and responsive design
-- **Scalable Architecture**: Designed for real-world deployment
 
-### Key Achievements
-- ✅ **Real-time AI Analysis**: Sub-30 second processing time
-- ✅ **Robust API Integration**: Instagram Business API with fallback system
-- ✅ **Advanced NLP**: Google Gemini 2.0 Flash for personality analysis
-- ✅ **Custom Content Generation**: AI-powered meme creation
-- ✅ **Modern UX/UI**: Smooth animations and responsive design
-- ✅ **Production Deployment**: Ready for scaling and real-world use
-
----
-
-## 📝 License & Copyright
-
-MIT License - see [LICENSE](LICENSE) file for details.
-
-**Built with ❤️ by Team VibeCheckAI for Samsung PRISM GenAI Hackathon 2025**
-
----
-
-*Last Updated: January 2025*
 
