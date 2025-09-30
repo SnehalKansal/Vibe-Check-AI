@@ -3,6 +3,8 @@
 .env.local
 .env.production
 .env.staging
+Backend/.env
+Frontend/.env*
 
 # Python
 __pycache__/
@@ -29,6 +31,9 @@ MANIFEST
 venv/
 env/
 ENV/
+Backend/venv/
+Backend/env/
+Backend/.venv/
 
 # Node.js
 node_modules/
@@ -68,6 +73,9 @@ coverage/
 *.swp
 *.swo
 *~
+*.iml
+*.iws
+*.ipr
 
 # OS generated files
 .DS_Store
@@ -77,6 +85,7 @@ coverage/
 .Trashes
 ehthumbs.db
 Thumbs.db
+Desktop.ini
 
 # Cache files
 .cache/
@@ -97,6 +106,12 @@ Thumbs.db
 # dotenv environment variables file
 .env.test
 
-# Temporary folders
-tmp/
-temp/
+# Development databases
+*.db
+*.sqlite
+*.sqlite3
+
+# Backup files
+*.bak
+*.backup
+*.orig

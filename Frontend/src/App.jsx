@@ -9,10 +9,11 @@ import Homepage from './components/Homepage';
 export default function App() {
     const [currentView, setCurrentView] = useState('homepage'); // 'homepage' or 'app'
     const [instaLink, setInstaLink] = useState('');
-    const [spotifyLink, setSpotifyLink] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [results, setResults] = useState(null);
     const [error, setError] = useState('');
+    
+
 
     const handleGetStarted = () => {
         setCurrentView('app');
@@ -22,10 +23,11 @@ export default function App() {
         setCurrentView('homepage');
         // Reset app state when going back to homepage
         setInstaLink('');
-        setSpotifyLink('');
         setResults(null);
         setError('');
     };
+
+
 
     const isValidInstagramUrl = (string) => {
         if (!string) return false;
@@ -39,32 +41,17 @@ export default function App() {
         }
     };
 
-    const isValidSpotifyUrl = (string) => {
-        if (!string) return false;
-        try {
-            const url = new URL(string);
-            return (url.protocol === "http:" || url.protocol === "https:") && 
-                   url.hostname.includes('spotify.com') && 
-                   url.pathname.includes('/playlist/');
-        } catch (_) {
-            return false;
-        }
-    };
+
 
     const handleVibeCheck = async () => {
         // Validation
-        if (!instaLink && !spotifyLink) {
-            setError('Please enter an Instagram profile link or username, or a Spotify playlist link.');
+        if (!instaLink) {
+            setError('Please enter an Instagram profile link or username.');
             return;
         }
 
         if (instaLink && !isValidInstagramUrl(instaLink)) {
             setError('Please enter a valid Instagram profile link or username.');
-            return;
-        }
-
-        if (spotifyLink && !isValidSpotifyUrl(spotifyLink)) {
-            setError('Please enter a valid Spotify playlist link.');
             return;
         }
 
@@ -80,9 +67,8 @@ export default function App() {
             if (instaLink) {
                 requestBody.insta_link = instaLink;
             }
-            if (spotifyLink) {
-                requestBody.spotify_link = spotifyLink;
-            }
+            
+
 
             const response = await fetch('http://127.0.0.1:8000/vibecheck/', {
                 method: 'POST',
@@ -121,7 +107,6 @@ export default function App() {
 
     const handleClearAll = () => {
         setInstaLink('');
-        setSpotifyLink('');
         setResults(null);
         setError('');
     };
@@ -168,6 +153,8 @@ export default function App() {
                             <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-tr from-cyan-900/10 via-transparent to-purple-900/10 pointer-events-none rounded-3xl"></div>
                             <Header />
 
+
+
                             {/* Input Section */}
                             <motion.div
                                 initial={{ opacity: 0 }}
@@ -181,15 +168,6 @@ export default function App() {
                                     onChange={(e) => setInstaLink(e.target.value)}
                                     placeholder="Paste Instagram profile link or username..."
                                     className="w-full bg-gray-900 border border-gray-700 text-white placeholder-gray-500 rounded-xl py-3 px-5 focus:ring-2 focus:ring-cyan-500 focus:outline-none transition-all duration-200 text-lg shadow-inner"
-                                    disabled={isLoading}
-                                />
-                                
-                                <input
-                                    type="text"
-                                    value={spotifyLink}
-                                    onChange={(e) => setSpotifyLink(e.target.value)}
-                                    placeholder="Paste Spotify playlist link (optional)..."
-                                    className="w-full bg-gray-900 border border-gray-700 text-white placeholder-gray-500 rounded-xl py-3 px-5 focus:ring-2 focus:ring-purple-500 focus:outline-none transition-all duration-200 text-lg shadow-inner"
                                     disabled={isLoading}
                                 />
                                 

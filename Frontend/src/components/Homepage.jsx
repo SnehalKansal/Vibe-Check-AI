@@ -8,10 +8,10 @@ import {
   Zap, 
   ArrowRight, 
   Instagram, 
-  Music, 
   Star,
   ChevronDown,
-  Play
+  Play,
+  Shield
 } from 'lucide-react';
 
 const AnimatedBackground = () => {
@@ -191,7 +191,7 @@ const Homepage = ({ onGetStarted }) => {
               transition={{ duration: 0.6, delay: 0.6 }}
               className="text-lg md:text-xl text-gray-400 mb-12 max-w-3xl mx-auto leading-relaxed"
             >
-              Discover your digital personality through AI-powered analysis of your Instagram profile and Spotify playlists. 
+              Discover your digital personality through AI-powered analysis of your Instagram profile. 
               Get personalized insights, custom memes, and find out what vibe you're really giving off.
             </motion.p>
 
@@ -234,11 +234,6 @@ const Homepage = ({ onGetStarted }) => {
               <div className="flex items-center gap-2">
                 <Instagram className="w-5 h-5" />
                 <span>Instagram Analysis</span>
-              </div>
-              <div className="w-1 h-1 bg-gray-600 rounded-full" />
-              <div className="flex items-center gap-2">
-                <Music className="w-5 h-5" />
-                <span>Spotify Integration</span>
               </div>
               <div className="w-1 h-1 bg-gray-600 rounded-full" />
               <div className="flex items-center gap-2">
@@ -290,23 +285,23 @@ const Homepage = ({ onGetStarted }) => {
             />
             
             <FeatureCard
-              icon={Music}
-              title="Spotify Integration"
-              description="Optional music taste analysis to add another dimension to your personality profile through your playlist preferences."
-              delay={0.4}
-            />
-            
-            <FeatureCard
               icon={Sparkles}
               title="Custom Memes"
               description="Receive personalized memes generated based on your analysis results. Perfect for sharing or just having a laugh."
-              delay={0.5}
+              delay={0.4}
             />
             
             <FeatureCard
               icon={Zap}
               title="Instant Results"
               description="Get your complete vibe analysis in seconds. No waiting around - instant gratification for your curiosity."
+              delay={0.5}
+            />
+            
+            <FeatureCard
+              icon={Shield}
+              title="Privacy Focused"
+              description="Your data stays secure and private. We analyze content without storing personal information or compromising your privacy."
               delay={0.6}
             />
           </div>
