@@ -42,8 +42,8 @@
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/yourusername/vibe-check-ai.git
-   cd vibe-check-ai
+   git clone https://github.com/SnehalKansal/Vibe-Check-AI.git
+   cd Vibe-Check-AI
    ```
 
 2. **Set up the backend:**
@@ -148,12 +148,6 @@ The backend provides the following endpoints:
 - `GET /health` - Server health status  
 - `POST /vibecheck/` - Main analysis endpoint
 - `GET /docs` - Interactive API documentation (Swagger UI)
-
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-*This is a demo application that uses sample data for Instagram content analysis. Please respect Instagram's Terms of Service and API usage guidelines.*
 
 
 
